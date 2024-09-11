@@ -30,7 +30,10 @@ The official docs also provide a walkthrough of creating a [Hello World project]
   powershell -c "irm https://windows.aiken-lang.org | iex"
   ```
   Up-to-date instructions can be found at the [official page](https://aiken-lang.org/installation-instructions). 
-* Once installed you can simply run the `aikup` command with no arguments and it will install the `aiken` CLI which is used to manage and compile projects. 
+* Once installed you can run the command `aikup list` command that returns a list of available version for the `aiken` CLI, which is used to manage and compile projects. 
+  You should then install the latest aplha version with the command `aikup install v1.0.29-alpha`. 
+| :information_source: | The non-alpha versions of aiken have syntax and semantic changes that are not backwards compatible. Validators in this repository will compile only with an alpha-version of aiken. |
+|----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 * Aiken comes with a built-in language server. The aiken docs provide [configuration instructions](https://aiken-lang.org/installation-instructions#language-server). 
 * Aiken can be integrated with the Zed, VSCode, Vim/Neovim and Emacs editors. Instructions can be found at the following [aiken docs](https://aiken-lang.org/installation-instructions#editor-integrations).  
 
