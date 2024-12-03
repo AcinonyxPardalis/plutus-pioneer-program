@@ -1,0 +1,1 @@
+export const secretSeed = "you wrestle sustain you virus negative scene chair stove frozen squeeze baby call buyer intact about join language become theory flight caution merit picture";

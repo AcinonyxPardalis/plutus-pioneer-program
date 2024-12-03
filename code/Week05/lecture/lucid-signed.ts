@@ -27,7 +27,7 @@ const lucid = await Lucid.new(
 );
 
 // load local stored seed as a wallet into lucid
-lucid.selectWalletFromSeed(secretSeed);
+lucid.selectWalletFromSeed(secretSeed, { accountIndex: 1 });
 const addr: Address = await lucid.wallet.address();
 console.log("own address: " + addr);
 

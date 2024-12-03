@@ -1,0 +1,2 @@
+export const secretSeed = "you wrestle sustain you virus negative scene chair stove frozen squeeze baby call buyer intact about join language become theory flight caution merit picture";
+export const blockfrostKey = "preprodIR80c5sJq6js9kK2FFUlIlEI06SLuvFo";

@@ -17,7 +17,7 @@ import { secretSeed } from "./seed.ts"
 const lucid = await Lucid.new(
   new Blockfrost(
     "https://cardano-preprod.blockfrost.io/api/v0",
-    "insert you own api key here"
+    "preprodIR80c5sJq6js9kK2FFUlIlEI06SLuvFo"
   ),
   "Preprod"
 );
@@ -49,6 +49,8 @@ const deadlinePosIx = BigInt(deadlineDate.getTime());
 const details: AddressDetails = getAddressDetails(addr);
 const beneficiaryPKH: string = details.paymentCredential.hash
 
+console.log(beneficiaryPKH);
+
 // Creating a datum with a beneficiary and deadline
 const datum: VestingDatum = {
     beneficiary: beneficiaryPKH,
@@ -66,6 +68,8 @@ async function vestFunds(amount: bigint): Promise<TxHash> {
     const txHash = await signedTx.submit();
     return txHash
 }
+
+//console.log(await vestFunds(100000n));
 
 async function claimVestedFunds(): Promise<TxHash> {
     const dtm: Datum = Data.to<VestingDatum>(datum,VestingDatum);

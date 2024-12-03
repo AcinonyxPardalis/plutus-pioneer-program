@@ -49,8 +49,8 @@ unstableMakeIsData ''MisteryDatum
 {-# INLINABLE mkMisteryValidator #-}
 mkMisteryValidator :: MisteryDatum -> () -> ScriptContext -> Bool
 mkMisteryValidator dat () ctx =
-    traceIfFalse "Benificiary1 did not sign or to late" checkCondition1 ||
-    traceIfFalse "Benificiary2 did not sign or is to early" checkCondition2
+    (traceIfFalse "Benificiary1 did not sign" checkCondition1 && traceIfFalse "Benificiary1 is to late" checkCondition2) ||
+    traceIfFalse "Benificiary2 did not sign or is to early" checkCondition3
     where
         txInfo :: TxInfo
         txInfo = scriptContextTxInfo ctx
@@ -59,11 +59,13 @@ mkMisteryValidator dat () ctx =
         txValidRange  = txInfoValidRange txInfo
 
         checkCondition1 :: Bool
-        checkCondition1 = txSignedBy txInfo (beneficiary1 dat) &&
-                          contains (to (deadline dat)) txValidRange
-
+        checkCondition1 = txSignedBy txInfo (beneficiary1 dat) 
+        
         checkCondition2 :: Bool
-        checkCondition2 = txSignedBy txInfo (beneficiary2 dat) &&
+        checkCondition2 = contains (to (deadline dat)) txValidRange
+
+        checkCondition3 :: Bool
+        checkCondition3 = txSignedBy txInfo (beneficiary2 dat) &&
                           contains (from (1 + deadline dat)) txValidRange
 
 {-# INLINABLE  mkWrappedMisteryValidator #-}
@@ -77,7 +79,7 @@ validator = mkValidatorScript $$(compile [|| mkWrappedMisteryValidator ||])
 ------------------------------------- HELPER FUNCTIONS --------------------------------------------
 
 saveVal :: IO ()
-saveVal = writeValidatorToFile "./assets/mistery1.plutus" validator
+saveVal = writeValidatorToFile "./assets/mistery2.plutus" validator
 
 misteryAddressBech32 :: Network -> String
 misteryAddressBech32 network = validatorAddressBech32 network validator
